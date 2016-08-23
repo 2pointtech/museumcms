@@ -1,0 +1,6 @@
+window.di = {}
+di.views = {}
+di.routers = {}
+di.models = {}
+di.models.classroom = {}
+

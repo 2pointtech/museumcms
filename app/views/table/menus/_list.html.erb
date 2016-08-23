@@ -1,0 +1,30 @@
+<fieldset>
+  <legend>Menus</legend>
+
+<p><%= link_to 'New Menu', new_table_menu_path, :method => :get, :class => 'btn btn-default' %></p>
+<table class="table_menus table table-striped crud" data-table-name="table_menus">
+  <thead>
+    <tr>
+      <th>Label</th>
+      <th>Title</th>
+      <th>Type</th>
+        <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% menus.each do |table_menu| %>
+      <tr data-id="<%= table_menu.id %>">
+      <td><%= table_menu.label %></td>
+      <td><%= table_menu.title %></td>
+      <td><%= table_menu.type %></td>
+          <td><%= table_menu.updated_at %></td>
+        <td>
+          <%= link_to edit_table_menu_path(table_menu) do %><i class="glyphicon glyphicon-edit"></i> edit<% end %>
+          <%= link_to table_menu_path(table_menu), :method => :delete, :confirm => "Are you sure?" do %><i class="glyphicon glyphicon-trash"></i> delete<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</fieldset>

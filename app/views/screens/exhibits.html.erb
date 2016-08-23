@@ -1,0 +1,87 @@
+<div class="what-you-can-see">
+<section>
+<article class="feature col-md-6 left">
+  <div class="main"></div>
+    <div class="info">
+      <h3></h3>
+      <div class="content"></div>
+    </div>
+</article>
+<article class="col-md-6 grid top">
+  <div class="block col-md-4"></div>
+  <div class="block col-md-4"></div>
+  <div class="block col-md-4"></div>
+</article>
+<article class="col-md-6 grid">
+  <div class="block col-md-4"></div>
+  <div class="block col-md-4"></div>
+  <div class="block col-md-4"></div>
+</article>
+<article class="col-md-6 grid">
+  <div class="block col-md-4"></div>
+  <div class="block col-md-4"></div>
+  <div class="block col-md-4"></div>
+</article>
+<article class="col-md-6 grid bottom">
+  <div class="block col-md-4"></div>
+  <div class="block col-md-4"></div>
+  <div class="block col-md-4"></div>
+</article>
+</section>
+</div>
+<%= coffee_script_tag do %>
+  $ ->
+
+    di.exhibits = new di.models.Events()
+
+    di.exhibits.fetch success: ->
+      populateExhibits()
+      populateFeature()
+
+    populateExhibits = ->
+      collection = di.exhibits.exhibits()
+      blocks = $('.block')
+      for i in [0..12]
+        block = $(blocks[i]) 
+        exhibit = collection.at i
+        if exhibit
+          block.html $('<div>').html($('<img>').attr(src: exhibit.get('file').url))
+        
+    di.currentIndex = 0
+
+    populateFeature = ->
+      $('.block.flipped').removeClass('flipped')
+      collection = di.exhibits.exhibits()
+      if di.currentIndex >= collection.length
+        di.currentIndex = 0
+      exhibit = collection.at di.currentIndex
+
+      setTimeout =>
+        $($('.block')[di.currentIndex]).addClass('flipped')
+      , 1000
+
+      setTimeout =>
+        $('.feature .main').html $('<div>').html($('<img>').attr(src: exhibit.get('file').url))
+        $('.feature .content').html exhibit.get('content')
+        $('.feature h3').html exhibit.get('title')
+        di.currentIndex++
+      , 2000
+
+    setInterval ->
+      di.exhibits.fetch success: -> populateExhibits()
+      console.log 'fetching'
+    , 1000 * 60 * 60
+
+
+    setInterval ->
+      populateFeature()
+      console.log 'feature'
+    , 1000 * 10
+      
+
+    <% unless params[:debug] %>
+    $(document).bind('contextmenu', (e)->
+      return false
+    ) 
+  <% end %>
+<% end %>

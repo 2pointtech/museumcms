@@ -1,0 +1,2 @@
+module Classroom::SchedulesHelper
+end

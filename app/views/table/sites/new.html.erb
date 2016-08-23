@@ -1,0 +1,7 @@
+<%= form_for @table_site do |f| %>
+  <%= render :partial => 'form', :object => f %>
+  <div class="form-actions">
+    <button type="submit" class="btn">Create</button>
+    <button type="submit" class="btn btn-primary" name="continue" value="true">Create and Continue</button>
+  </div>
+<% end %>

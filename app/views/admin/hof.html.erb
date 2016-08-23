@@ -1,0 +1,17 @@
+<h1>K-State HOF Screen Admin</h1>
+
+<fieldset>
+<legend>General Settings</legend>
+<%= form_for @hof_setting, :html => { :class => 'form-horizontal' } do |form| %>
+  <%= form.control :attract_loop, 'Attract Loop' do %>
+    <%= form.file_field :attract_loop %>
+
+    <% unless @hof_setting.attract_loop.blank? %>
+      <div><%= @hof_setting.attract_loop %></div>
+    <% end %>
+  <% end %>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">Save</button>
+  </div>
+<% end %>
+</fieldset>

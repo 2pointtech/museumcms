@@ -1,0 +1,7 @@
+<h1>Photo</h1>
+<a href="#" class="close">x</a>
+<div class="body">
+  <div class="photo">
+    <img src="/assets/dino1.jpg">
+  </div>
+</div>

@@ -1,0 +1,20 @@
+    <fieldset>
+      <legend>Donors &gt; Donor Details</legend>
+      
+      <%= form.control :name, 'Name' %>
+
+          
+      <%= form.control :description, 'Description' do %>
+        <%= form.text_area :description %>
+      <% end %>
+
+          
+      <%= form.control :photo, 'Photo' do %>
+        <%= form.file_field :photo %>
+
+        <% unless @donors_donor.photo.blank? %>
+          <div><%= @donors_donor.photo %></div>
+        <% end %>
+      <% end %>
+
+    </fieldset>

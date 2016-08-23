@@ -1,0 +1,8 @@
+<%= form_for @table_menu do |f| %>
+  <%= hidden_field_tag 'table_menu[site_id]', params[:site_id] %>
+  <%= render :partial => 'form', :object => f %>
+  <div class="form-actions">
+    <button type="submit" class="btn btn">Create</button>
+    <button type="submit" class="btn btn-primary" name="continue" value="true">Create and Continue</button>
+  </div>
+<% end %>

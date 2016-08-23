@@ -1,0 +1,43 @@
+<div class="theater">
+  <section>
+    <header>  
+      <div class="col-md-10 logo">
+        <h2>SCIENCE THEATER PLAYLIST</h2>
+      </div>
+      <div class="col-md-2 current-time">
+        <h5>CURRENT TIME:</h5>
+        <h2></h2>
+      </div>
+    </header>
+  </section>
+</div>
+<%= coffee_script_tag do %>
+  $ ->
+
+    movies = new di.models.Movies( <%= raw Theater::Showing.all.to_json %> )
+
+    updateTime = ->
+      $('.current-time h2').html moment().format 'h:mma'
+    setInterval updateTime, 1000
+
+    updateData = ->
+      movies.fetch()
+    updateData()
+    setInterval updateData, 10000
+    
+    nowView = new di.views.NowPlayingView
+      collection: movies
+
+    $('section').append nowView.render()
+
+    upView = new di.views.UpcomingListView
+      collection: movies
+
+    $('section').append upView.render()
+
+    <% unless params[:debug] %>
+    $(document).bind('contextmenu', (e)->
+      return false;
+    ); 
+  <% end %>
+<% end %>

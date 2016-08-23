@@ -1,0 +1,30 @@
+<h1>Media</h1>
+
+<p><%= button_to 'New Medium', new_medium_path, :method => :get, :class => 'btn' %></p>
+<table class="media table table-striped crud" data-table-name="media">
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Title</th>
+      <th>Attachable</th>
+      <th>Attachable type</th>
+        <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @media.each do |medium| %>
+      <tr data-id="<%= medium.id %>">
+      <td><%= medium.file %></td>
+      <td><%= medium.title %></td>
+      <td><%= medium.attachable_id %></td>
+      <td><%= medium.attachable_type %></td>
+          <td><%= medium.updated_at %></td>
+        <td>
+          <%= link_to edit_medium_path(medium) do %><i class="icon-edit"></i> edit<% end %>
+          <%= link_to medium_path(medium), :method => :delete, :confirm => "Are you sure?" do %><i class="icon-trash"></i> delete<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

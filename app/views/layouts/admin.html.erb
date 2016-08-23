@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Prairie Fire</title>
+  <%= stylesheet_link_tag    "admin", :media => "all" %>
+  <%= javascript_include_tag "application", "crud" %>
+  <%= csrf_meta_tags %>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    
+    </style>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid"><div class="navbar-header"><a class="navbar-brand" href="#">Prairie Fire</a></div>
+        
+      </div>
+    </div>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">Barnum Table</div>
+          <ul class="list-group">
+            <li class="list-group-item"><%= link_to "Dig Sites", table_sites_path %></li>
+          </ul>
+          <div class="panel-heading">Ticketing</div>
+          <ul class="list-group">
+            <li class="list-group-item"><%= link_to "Tickets", ticketing_tickets_path %></li>
+            <li class="list-group-item"><%= link_to "Events", ticketing_events_path %></li>
+          </ul>
+          <div class="panel-heading">Theater</div>
+          <ul class="list-group">
+            <li class="list-group-item"><%= link_to "Schedule", theater_showings_path %></li>
+          </ul>
+          <div class="panel-heading">Videos</div>
+          <ul class="list-group">
+            <li class="list-group-item"><%= link_to "Videos", videos_path %></li>
+          </ul>
+          <div class="panel-heading">Classroom</div>
+          <ul class="list-group">
+            <li class="list-group-item"><%= link_to "Schedules", classroom_schedules_path %></li>
+          </ul>
+          <div class="panel-heading">Donors</div>
+          <ul class="list-group">
+            <li class="list-group-item"><%= link_to "Donors", donors_donors_path %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-10">
+            
+        <%= yield %>
+      </div>
+    </div>
+  </div>
+  </body>
+</html>

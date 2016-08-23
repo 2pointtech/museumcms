@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @ticketing_event.title %>
+</p>
+
+<p>
+  <b>File:</b>
+  <%= @ticketing_event.file %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @ticketing_event.date %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @ticketing_event.content %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @ticketing_event.type %>
+</p>
+
+
+<%= link_to 'Edit', edit_ticketing_event_path(@ticketing_event) %> |
+<%= link_to 'Back', ticketing_events_path %>

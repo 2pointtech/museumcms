@@ -1,0 +1,8 @@
+<div class="info event">
+  <span class="image-container pull-left">
+    <img src="http://placehold.it/72x72">
+    <h3>MAY 21</h3>
+  </span>
+  <strong>EVENT TITLE</strong>
+  <div class="content"></div>
+</div>

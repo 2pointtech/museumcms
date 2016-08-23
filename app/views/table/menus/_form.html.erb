@@ -1,0 +1,101 @@
+    <fieldset>
+      <legend>Table &gt; Menu Details</legend>
+      
+      <%= form.control :label, 'Label' %>
+
+          
+      <%= form.control :title, 'Dialog Title' %>
+
+          
+      <%= form.control :type, 'Type' do %>
+        <%= form.select :type, [['Text', 'Table::TextMenu'], ['Photos/Videos', 'Table::MediaMenu']], {}, { :class => 'form-control' } %>
+      <% end %>
+
+      <% if @table_menu.persisted? %>
+      <div class="media">
+      <%= form.control :media, 'Media' do %>
+          <label>Upload Media</label>
+          <input id="fileupload" type="file" name="files[]" data-url="/media" multiple>
+          <div class="progress progress-striped" style="display:none">
+            <div class="bar"></div>
+          </div>
+
+        <ul class="unstyled thumbnails">
+          <%= render(:partial => 'media/medium', :collection => @table_menu.media) if @table_menu.type == 'Table::MediaMenu' %>
+        </ul>
+
+        <%= coffee_script_tag do %>
+          $ ()->
+            $('#fileupload').fileupload
+              dataType: 'html'
+              formData: 
+                attachable_id: '<%= @table_menu.id %>' 
+                attachable_type: 'Table::MediaMenu' 
+              done: (e, data)->
+                $('.progress').hide()
+                $('.thumbnails').html data.result
+              progressall: (e, data)->
+                  progress = parseInt(data.loaded / data.total * 100, 10) 
+                  $('.progress').show()
+                  $('.progress .bar').css(
+                      'width': progress + '%' 
+                  )
+
+            $('.thumbnails').on 'click', '.delete', ->
+              $(this).closest('.thumbnail').fadeOut()
+            $('.thumbnails').on 'click', '.edit', ->
+              $('#mediaModal textarea').val $(this).closest('.thumbnail').find('#caption').val()
+              $('#mediaModal .btn-primary').val $(this).closest('.thumbnail').find('#id').val()
+              $('#mediaModal').modal('show')
+        <% end %>
+      <% end %>
+      </div>
+
+      <div class="text">
+      <%= form.control :content, 'Content' do %>
+        <%= form.text_area :content, :class => 'ckeditor' %>
+      <% end %>
+      </div>
+      <% end %>
+    </fieldset>
+
+<%= coffee_script_tag do %>
+  $ ->
+    typeCheck = ->
+      if $('#table_menu_type').val() == 'Table::TextMenu'
+        $('.text').show()
+        $('.media').hide()
+      else
+        $('.text').hide()
+        $('.media').show()
+    $('#table_menu_type').change typeCheck
+    typeCheck()
+
+    $('#mediaModal .btn-primary').click ->
+      value = $(this).closest('.modal').find('textarea').val() 
+      id = $(this).val()
+      $.ajax "/media/" + id, type: 'put', data: { "medium[caption]": value }
+      $(".thumbnails .medium#{id} #caption").val value
+      $('#mediaModal').modal('hide')
+      
+
+<% end %>
+
+<div id="mediaModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Edit Media</h4>
+      </div>
+      <div class="modal-body">
+        <h4>Caption</h4>
+        <p><textarea style="width: 100%; min-height: 300px;"></textarea></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+    </div>
+</div>

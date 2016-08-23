@@ -1,0 +1,29 @@
+<h1>Table &gt; Dig Sites</h1>
+
+<p><%= button_to 'New Site', new_table_site_path, :method => :get, :class => 'btn' %></p>
+<table class="table_sites table table-striped crud" data-table-name="table_sites">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>X</th>
+      <th>Y</th>
+        <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @table_sites.each do |table_site| %>
+      <tr data-id="<%= table_site.id %>">
+      <td><%= table_site.image %></td>
+      <td><%= table_site.x %></td>
+      <td><%= table_site.y %></td>
+          <td><%= table_site.updated_at %></td>
+        <td>
+          <%= link_to table_menus_path(:site_id => table_site) do %><i class="glyphicon glyphicon-align-justify"></i> edit menus<% end %>
+          <%= link_to edit_table_site_path(table_site) do %><i class="glyphicon glyphicon-edit"></i> edit<% end %>
+          <%= link_to table_site_path(table_site), :method => :delete, :confirm => "Are you sure?" do %><i class="glyphicon glyphicon-trash"></i> delete<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

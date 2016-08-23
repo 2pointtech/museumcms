@@ -1,0 +1,2 @@
+module Donors::DonorsHelper
+end

@@ -1,0 +1,2 @@
+module Ticketing::EventsHelper
+end

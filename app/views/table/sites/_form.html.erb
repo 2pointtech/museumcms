@@ -1,0 +1,30 @@
+    <fieldset>
+      <legend>Table &gt; Site Details</legend>
+      
+      <%= form.control :image, 'Image' do %>
+        <%= form.file_field :image %>
+
+        <% unless @table_site.image.blank? %>
+          <div><%= @table_site.image %></div>
+        <% end %>
+      <% end %>
+
+
+      <%= form.control :color, 'Color' do %>
+        <%= form.text_field :color, :class => 'form-control' %>
+      <% end %>
+          
+      <%= form.control :x, 'X' do %>
+        <%= form.number_field :x, :class => 'form-control' %>
+      <% end %>
+
+          
+      <%= form.control :y, 'Y' do %>
+        <%= form.number_field :y, :class => 'form-control' %>
+      <% end %>
+
+      <%= form.control :map_description, 'Map Description' do %>
+        <%= form.text_area :map_description, :class => 'ckeditor' %>
+      <% end %>
+
+    </fieldset>

@@ -1,0 +1,23 @@
+    <fieldset>
+      <legend>Ticketing &gt; Ticket Details</legend>
+      
+      <%= form.control :title, 'Title' %>
+
+          
+      <%= form.control :price, 'Price' %>
+      <%= form.control :child_price, 'Child Price' %>
+
+      <%= form.control :additional_cost, 'Additional Cost' do %>
+        <%= form.check_box :additional_cost %>
+      <% end %>
+
+      <%= form.control :type, 'Type' do %>
+        <%= form.select :type, [['General', 'Ticketing::GeneralTicket'], ['Membership', 'Ticketing::Membership']], {}, :class => 'form-control' %>
+      <% end %>
+          
+      <%= form.control :content, 'Content' do %>
+        <%= form.text_area :content, :class => 'ckeditor' %>
+      <% end %>
+
+          
+    </fieldset>

@@ -1,0 +1,50 @@
+<% content_for :head do %>
+<meta name="viewport" content="initial-scale=0.72"/>
+<% end %>
+<div class="schedule">
+  <section>
+    <header>  
+      <div class="col-md-10 logo">
+        <h2><%= @classroom_schedule.title %></h2>
+      </div>
+      <div class="col-md-2 current-time">
+        <h5>CURRENT TIME:</h5>
+        <h2></h2>
+      </div>
+    </header>
+  </section>
+</div>
+<%= coffee_script_tag do %>
+  $ ->
+
+    events = new di.models.classroom.Events( <%= raw @classroom_schedule.events.to_json %> )
+    events.scheduleId = <%= @classroom_schedule.id %>
+
+    updateTime = ->
+      $('.current-time h2').html moment().format 'h:mma'
+    setInterval updateTime, 1000
+
+    updateData = ->
+      events.fetch()
+    setInterval updateData, 1000
+    
+    nowView = new di.views.NowPlayingView
+      collection: events
+      nowTitle: 'CURRENT CLASS'
+      nextTitle: 'NEXT CLASS'
+      countdownTitle: 'STARTS IN'
+
+    $('section').append nowView.render()
+
+    upView = new di.views.UpcomingListView
+      collection: events
+
+    $('section').append upView.render()
+
+
+    <% unless params[:debug] %>
+    $(document).bind('contextmenu', (e)->
+      return false;
+    ); 
+  <% end %>
+<% end %>

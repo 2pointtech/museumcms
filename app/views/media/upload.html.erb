@@ -1,0 +1,11 @@
+<% if @image %>
+  <%= image_tag @image.file.url %>
+  <script>
+    CKEditorFuncNum = <%= @func_num %>;
+    function SetUrl( fileUrl )
+    { 
+      window.parent.CKEDITOR.tools.callFunction(CKEditorFuncNum, fileUrl);
+    }
+    SetUrl("<%= @image.file.url %>");
+  </script>
+<% end %>

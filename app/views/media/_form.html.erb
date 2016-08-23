@@ -1,0 +1,23 @@
+    <fieldset>
+      <legend>Medium Details</legend>
+      
+      <%= form.control :file, 'File' do %>
+        <%= form.file_field :file %>
+
+        <% unless @medium.file.blank? %>
+          <div><%= @medium.file %></div>
+        <% end %>
+      <% end %>
+
+          
+      <%= form.control :title, 'Title' %>
+
+          
+      <%= form.control :attachable_id, 'Attachable' do %>
+        <%= form.number_field :attachable_id %>
+      <% end %>
+
+          
+      <%= form.control :attachable_type, 'Attachable type' %>
+
+          </fieldset>

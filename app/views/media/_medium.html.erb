@@ -1,0 +1,13 @@
+  <li class="thumbnail medium<%= medium.id %>">
+  <% if medium.video? %>
+    <video>
+      <source src="<%= medium.file.url %>">
+    </video>
+  <% else %>
+    <%= image_tag medium.file.url %>
+  <% end %>
+  <%= hidden_field_tag :caption, medium.caption %>
+  <%= hidden_field_tag :id, medium.id %>
+  <a href="#" class="edit">Edit</a>
+  <%= link_to "Delete", { :controller => '/media', :action => 'destroy', :id => medium.id }, :method => 'delete', :remote => true, :class => 'delete', :confirm => 'Are you sure?' %>
+  </li>

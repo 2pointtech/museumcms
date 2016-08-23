@@ -1,0 +1,9 @@
+<h1>Photos</h1>
+<a href="#" class="close">x</a>
+<div class="body">
+  <div class="thumbs">
+    <img src="/assets/dino1.jpg">
+    <img src="/assets/dino3.jpg">
+    <img src="/assets/dino2.jpg">
+  </div>
+</div>

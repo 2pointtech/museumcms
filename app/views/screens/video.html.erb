@@ -1,0 +1,4 @@
+<% video = Video.find params[:id] %>
+<video autoplay="autoplay" loop="loop" style="width: 100%; min-height: 100%">
+  <source src="<%= video.file.url %>">
+</video>

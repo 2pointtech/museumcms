@@ -1,0 +1,25 @@
+<div class="main">
+  <p class="donors-title">Donors &amp; Supporters</p>
+  <div class="donors">
+  </div>
+</div>
+<%= coffee_script_tag do %>
+  $ ->
+
+    donors = new di.models.Donors( <%= raw Donors::Donor.all.to_json %> )
+
+    updateData = ->
+      donors.fetch()
+    setInterval updateData, 1000
+    
+    donorView = new di.views.DonorsView
+      collection: donors
+
+    $('.donors').append donorView.render()
+
+    <% unless params[:debug] %>
+    $(document).bind('contextmenu', (e)->
+      return false;
+    ); 
+  <% end %>
+<% end %>

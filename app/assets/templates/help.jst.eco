@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <a class="close">&times;</a>
+  <div class="button">Instructions</div>
+  <div class="body">
+    <ul>
+      <li>Choose a magnifying glass from the corner of the screen.
+      <li>Using your finger, drag the glass around the map to discover hidden digsites throughout the world.
+      <li>An Icon will appear when you’ve uncovered a digsite, followed by a series of buttons.
+      <li>Select any of the buttons to learn more about that particular dig site.
+    </ul>
+  </div>
+</div>
+  

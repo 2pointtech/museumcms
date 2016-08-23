@@ -1,0 +1,22 @@
+<div class="page">
+</div>
+<div class="popups">
+</div>
+<%= javascript_tag do %>
+  $(function() {
+
+    di.sites = <%= raw Table::Site.all.to_json %>
+
+    di.router = new di.routers.DefaultRouter();
+    Backbone.history.start();
+    <% unless params[:debug] %>
+    $(document).bind('contextmenu', function(e) {
+      return false;
+    }); 
+    <% end %>
+    _.each(di.sites, function(m) {
+      $(document.body).append($('<div>').addClass('dot').css({ top: m.y, left: m.x }));
+    });
+    $('.dot').pulsate()
+  });
+<% end %>

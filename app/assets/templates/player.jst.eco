@@ -1,0 +1,17 @@
+<div class="media">
+<video autoplay="autoplay">
+  <source src="">
+</video>
+<div class="video-controls">
+  <span class="time">
+    <span class="current">00:00</span> /
+    <span class="total">00:00</span>
+  </span>
+  <span class="play dp">
+    &#61543;
+  </span>
+  <span class="seek">
+    <input type="range" value="0">
+  </span>
+</div>
+</div>

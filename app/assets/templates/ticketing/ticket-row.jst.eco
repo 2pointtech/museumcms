@@ -1,0 +1,17 @@
+        <div class="row ticket">
+          <div class="col-md-8">
+            <div class="info">
+              <span class="title"></span>
+              <div class="content"></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="adult price">
+              <strong></strong><span class="asterisk">*</span>
+            </div>
+            <div class="child price">
+              <strong></strong><span class="asterisk">*</span>
+            </div>
+            <div class="additional">*Additional cost.<br>GA required for entry</div>
+          </div>
+        </div>

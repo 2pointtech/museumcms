@@ -1,0 +1,15 @@
+<div class="offset">
+    <div class="bumper"></div>
+    <div class="window-glass"></div>
+    <div class="magnifying-glass"><img src="/assets/glass.svg"><div class="move-handle"></div><div class="rotate-handle"></div></div>
+    <ul class="wedges">
+      <!--
+      <li><a class="what"><span>WHAT</span></a></li>
+      <li><a class="how"><span>HOW</span></a></li>
+      <li><a class="finds"><span>FINDS</span></a></li>
+      <li><a class="photos"><span>PHOTOS</span></a></li>
+      <li><a class="videos"><span class="rotate-180">VIDEOS</span></a></li>
+      <li><a class="who"><span class="rotate-180">WHO</span></a></li>
+      -->
+     </ul>
+</div>

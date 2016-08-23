@@ -1,0 +1,26 @@
+<h1>Classroom &gt; Schedules</h1>
+
+<p><%= button_to 'New Schedule', new_classroom_schedule_path, :method => :get, :class => 'btn' %></p>
+<table class="classroom_schedules table table-striped crud" data-table-name="classroom_schedules">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Feed url</th>
+        <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @classroom_schedules.each do |classroom_schedule| %>
+      <tr data-id="<%= classroom_schedule.id %>">
+      <td><%= classroom_schedule.title %></td>
+      <td><%= classroom_schedule.feed_url %></td>
+          <td><%= classroom_schedule.updated_at %></td>
+        <td>
+          <%= link_to edit_classroom_schedule_path(classroom_schedule) do %><i class="glyphicon glyphicon-edit"></i> edit<% end %>
+          <%= link_to classroom_schedule_path(classroom_schedule), :method => :delete, :confirm => "Are you sure?" do %><i class="glyphicon glyphicon-trash"></i> delete<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

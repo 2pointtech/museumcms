@@ -1,0 +1,28 @@
+    <fieldset>
+      <legend>Ticketing &gt; Event Details</legend>
+      
+      <%= form.control :title, 'Title' %>
+
+          
+      <%= form.control :file, 'File' do %>
+        <%= form.file_field :file %>
+
+        <% unless @ticketing_event.file.blank? %>
+          <div><%= @ticketing_event.file %></div>
+        <% end %>
+      <% end %>
+
+          
+      <%= form.control :date, 'Date' do %>
+        <%= form.date_select :date %>
+      <% end %>
+
+      <%= form.control :type, 'Type' do %>
+        <%= form.select :type, [['General', 'Ticketing::GeneralEvent'], ['Program', 'Ticketing::Program'], ['Exhibit', 'Ticketing::Exhibit']], {}, { :class => 'form-control' } %>
+      <% end %>
+          
+      <%= form.control :content, 'Content' do %>
+        <%= form.text_area :content, :class => 'ckeditor' %>
+      <% end %>
+          
+          </fieldset>

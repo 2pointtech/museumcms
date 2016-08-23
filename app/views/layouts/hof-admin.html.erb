@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>K-State HOF</title>
+  <%= stylesheet_link_tag    "admin", :media => "all" %>
+  <%= javascript_include_tag "application", "crud" %>
+  <%= csrf_meta_tags %>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/admin/hof">K-State HOF</a>
+          <div class="container">
+            <ul class="nav">
+              <li<%= nav_active :home_images %>><%= link_to "Home Images", hof_home_images_path %></li>
+              <li<%= nav_active :pages %>><%= link_to "Pages", hof_pages_path %></li>
+              <li<%= nav_active :sports %>><%= link_to "Sports", hof_sports_path %></li>
+              <li<%= nav_active :inductees %>><%= link_to "Inductees", hof_inductees_path %></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="divider-vertical"></li>
+              <li><%= link_to "History Admin", "/admin/history" %></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <%= yield %>
+    </div> <!-- /container -->
+  </body>
+</html>

@@ -1,0 +1,96 @@
+<div class="ticket-screen">
+  <section>
+    <header>
+      <img src="/assets/ticketing-screen-logo.png">  
+    </header>
+    <article class="row1">
+      <div class="col-md-7 tickets">
+        <div class="row">
+          <div class="col-md-8">
+            <h1>TICKETS</h1>
+          </div>
+          <div class="col-md-4 heading">
+            <div class="adult price">
+              Adult<br><span class="age">(13+)</span>
+            </div>
+            <div class="child price">
+              Child<br><span class="age">(3-12)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 events">
+        <h1>EVENTS</h1>
+      </div>
+    </article>
+    <article class="row2">
+        <div class="col-md-7 memberships">
+          <h1>MEMBERSHIPS</h1>
+        </div>
+        <div class="col-md-5 programs">
+          <h1>PROGRAMS</h1>
+        </div>
+    </article>
+  </section>
+</div>
+<%= coffee_script_tag do %>
+  $ ->
+
+    di.tickets = new di.models.Tickets()
+    di.events = new di.models.Events()
+
+    di.events.fetch success: -> populateEvents()
+    di.tickets.fetch success: -> populateTickets()
+
+    setInterval ->
+      di.events.fetch success: -> populateEvents()
+      di.tickets.fetch success: -> populateTickets()
+      console.log 'fetching'
+    , 1000 * 60 * 60
+
+    populateEvents = =>
+      $('.events .info').remove()
+      $('.programs .info').remove()
+
+      for event in di.events.models
+        container = null
+        if event.general()
+          container = $('.events')
+        else if event.program()
+          container = $('.programs')
+
+        if container
+          container.append JST['ticketing/event-row']
+          container.find('.info:last-child strong').html event.get('title')
+          container.find('.info:last-child .content').html event.get('content')
+          container.find('.info:last-child h3').html moment(event.get('date')).format("MMM Do")
+          container.find('.info:last-child img').attr src: event.get('file').url
+
+    populateTickets = =>
+      $('.tickets .ticket').remove()
+      $('.memberships .membership').remove()
+
+      general = di.tickets.general()
+      for ticket in general.models
+        $('.tickets').append JST['ticketing/ticket-row']
+        $('.tickets .row:last-child .title').html ticket.get('title')
+        $('.tickets .row:last-child .content').html ticket.get('content')
+        $('.tickets .row:last-child .adult strong').html "$" + ticket.get('price')
+        $('.tickets .row:last-child .child strong').html "$" + ticket.get('child_price')
+        unless ticket.get('additional_cost')
+          $('.tickets .row:last-child .asterisk').hide()
+          $('.tickets .row:last-child .additional').hide()
+
+      tickets = di.tickets.memberships()
+      for ticket in tickets.models
+        $('.memberships').append JST['ticketing/membership-row']
+        $('.memberships .row:last-child .title').html ticket.get('title')
+        $('.memberships .row:last-child .content').html ticket.get('content')
+        $('.memberships .row:last-child .price').html "$" + ticket.get('price')
+
+    <% unless params[:debug] %>
+    $(document).bind('contextmenu', ->
+      return false
+    )
+  <% end %>
+<% end %>

@@ -1,0 +1,57 @@
+    <fieldset>
+      <legend>Theater &gt; Showing Details</legend>
+      
+      <%= form.control :title, 'Title' %>
+
+          
+      <%= form.control :category, 'Category' %>
+
+      <%= form.control :auto_play, 'Automatically Play' do %>
+        <%= form.check_box :auto_play %>
+      <% end %>
+      <div class="when">
+      <%= form.control :when, 'When' do %>
+        <%= form.time_select :when, { :ampm => true } %>
+      <% end %>
+      </div>
+
+      <%= form.control :length, 'Length', :placeholder => 'In seconds' %>
+
+      <%= form.control :video, 'Video' do %>
+
+        <%= form.collection_select(:existing_video_id, Video.all, :id, :name, { :include_blank => 'Select Video' }) %>
+
+        or 
+
+        <button class="upload">Upload</button>
+
+        <div class="video_upload"<% if @theater_showing.existing_video or @theater_showing.video.blank? %> style="display: none"<% end %>>
+          <%= form.file_field :video %>
+
+          <% unless @theater_showing.video.blank? %>
+            <div><%= @theater_showing.video %></div>
+          <% end %>
+          <p class="inline-help">This is optional, should be mp4, m4v or webm.</p>
+        </div>
+      <% end %>
+
+
+          
+    </fieldset>
+<%= coffee_script_tag do %>
+  $ ->
+    $('button.upload').click (e)->
+      $('.video_upload').show()
+      e.preventDefault()
+
+    checkBox = ->
+      if $('#theater_showing_auto_play').is(':checked')
+        $('.when select').attr disabled: true
+      else
+        $('.when select').attr disabled: false
+
+    checkBox()
+
+    $('#theater_showing_auto_play').click checkBox
+
+<% end %>

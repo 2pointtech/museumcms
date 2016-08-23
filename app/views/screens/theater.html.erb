@@ -1,0 +1,23 @@
+<div class="theater">
+</div>
+<%= coffee_script_tag do %>
+  $ ->
+
+    movies = new di.models.Movies( <%= raw Theater::Showing.all.to_json %> )
+
+    updateData = ->
+      movies.fetch()
+    updateData()
+    setInterval updateData, 1000
+    
+    nowView = new di.views.TheaterPlayerView
+      collection: movies
+
+    $('.theater').append nowView.render()
+
+    <% unless params[:debug] %>
+    $(document).bind('contextmenu', (e)->
+      return false;
+    ); 
+  <% end %>
+<% end %>

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Label:</b>
+  <%= @table_menu.label %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @table_menu.title %>
+</p>
+
+<p>
+  <b>Type:</b>
+  <%= @table_menu.type %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @table_menu.content %>
+</p>
+
+<p>
+  <b>Site:</b>
+  <%= @table_menu.site %>
+</p>
+
+
+<%= link_to 'Edit', edit_table_menu_path(@table_menu) %> |
+<%= link_to 'Back', table_menus_path %>

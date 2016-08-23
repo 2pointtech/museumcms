@@ -1,0 +1,14 @@
+    <fieldset>
+      <legend>Video Details</legend>
+
+      <%= form.control :name, 'Name' %>
+      
+      <%= form.control :file, 'File' do %>
+        <%= form.file_field :file %>
+
+        <% unless @video.file.blank? %>
+          <div><%= @video.file %></div>
+        <% end %>
+      <% end %>
+
+    </fieldset>

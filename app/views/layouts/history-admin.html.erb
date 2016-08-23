@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>K-State History</title>
+  <%= stylesheet_link_tag    "admin", :media => "all" %>
+  <%= javascript_include_tag "application", "crud" %>
+  <%= csrf_meta_tags %>
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/admin/history">K-State History</a>
+          <div class="container">
+            <ul class="nav">
+              <li<%= nav_active :home_images %>><%= link_to "Home Images", history_home_images_path %></li>
+              <li<%= nav_active :pages %>><%= link_to "Pages", history_pages_path %></li>
+              <li<%= nav_active :moments %>><%= link_to "History", history_moments_path %></li>
+              <li<%= nav_active :stadia %>><%= link_to "Stadiums", history_stadia_path %></li>
+              <li<%= nav_active :games %>><%= link_to "Bowls", history_games_path %></li>
+              <li<%= nav_active :champs %>><%= link_to "Champs", history_champs_path %></li>
+              <li<%= nav_active :all_americans, :all_american_categories %>><%= link_to "All Americans", history_all_american_categories_path %></li>
+              <li<%= nav_active :honorees %>><%= link_to "Ring of Honor", history_honorees_path %></li>
+              <li<%= nav_active :pros, :teams %>><%= link_to "Pros", history_pros_path %></li>
+            </ul>
+            <ul class="nav pull-right">
+              <li class="divider-vertical"></li>
+              <li><%= link_to "HOF Admin", "/admin/hof" %></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <%= yield %>
+    </div> <!-- /container -->
+  </body>
+</html>

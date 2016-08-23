@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>File:</b>
+  <%= @medium.file %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @medium.title %>
+</p>
+
+<p>
+  <b>Attachable:</b>
+  <%= @medium.attachable_id %>
+</p>
+
+<p>
+  <b>Attachable type:</b>
+  <%= @medium.attachable_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_medium_path(@medium) %> |
+<%= link_to 'Back', media_path %>

@@ -1,0 +1,37 @@
+<h1>Theater &gt; Showings</h1>
+
+<p><%= button_to 'New Showing', new_theater_showing_path, :method => :get, :class => 'btn' %></p>
+<table class="theater_showings table table-striped crud" data-table-name="theater_showings">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>When</th>
+      <th>Length</th>
+        <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @theater_showings.each do |theater_showing| %>
+      <tr data-id="<%= theater_showing.id %>">
+      <td><%= theater_showing.title %></td>
+      <td><%= theater_showing.category %></td>
+      <td><%= theater_showing.when.to_formatted_s(:time) unless theater_showing.auto_play? %></td>
+      <td><%= theater_showing.length %>s</td>
+          <td><%= theater_showing.updated_at %></td>
+        <td>
+          <%= link_to edit_theater_showing_path(theater_showing) do %><i class="glyphicon glyphicon-edit"></i> edit<% end %>
+          <%= link_to theater_showing_path(theater_showing), :method => :delete, :confirm => "Are you sure?" do %><i class="glyphicon glyphicon-trash"></i> delete<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= coffee_script_tag do %>
+  $ ->
+    $('tbody').sortable
+      update: (e, ui)->
+        id = $(ui.item).data('id')
+        $.ajax "/theater/showings/" + $(ui.item).data('id'), type: 'put', data: { "theater_showing[row_position]": $(ui.item).index() }
+<% end %>

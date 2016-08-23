@@ -1,0 +1,9 @@
+<div class="media">
+  <a class="pull-left media-link" href="#">
+    <img class="media-object">
+  </a>
+  <div class="media-body">
+    <h2 class="media-heading"></h2>
+    <p></p>
+  </div>
+</div>

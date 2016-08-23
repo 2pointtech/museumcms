@@ -1,0 +1,26 @@
+<h1>Videos</h1>
+
+<p><%= button_to 'New Video', new_video_path, :method => :get, :class => 'btn' %></p>
+<table class="videos table table-striped crud" data-table-name="videos">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>URL</th>
+        <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @videos.each do |video| %>
+      <tr data-id="<%= video.id %>">
+      <td><%= video.name %></td>
+          <td><%= url_for(:controller => 'screens', :action => 'video', :id => video.id, :only_path => false ) %></td>
+          <td><%= video.updated_at %></td>
+        <td>
+          <%= link_to edit_video_path(video) do %><i class="glyphicon glyphicon-edit"></i> edit<% end %>
+          <%= link_to video_path(video), :method => :delete, :confirm => "Are you sure?" do %><i class="glyphicon glyphicon-trash"></i> delete<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

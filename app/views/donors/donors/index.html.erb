@@ -1,0 +1,24 @@
+<h1>Donors &gt; Donors</h1>
+
+<p><%= button_to 'New Donor', new_donors_donor_path, :method => :get, :class => 'btn' %></p>
+<table class="donors_donors table table-striped crud" data-table-name="donors_donors">
+  <thead>
+    <tr>
+      <th>Name</th>
+        <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @donors_donors.each do |donors_donor| %>
+      <tr data-id="<%= donors_donor.id %>">
+      <td><%= donors_donor.name %></td>
+          <td><%= donors_donor.updated_at %></td>
+        <td>
+          <%= link_to edit_donors_donor_path(donors_donor) do %><i class="glyphicon glyphicon-edit"></i> edit<% end %>
+          <%= link_to donors_donor_path(donors_donor), :method => :delete, :confirm => "Are you sure?" do %><i class="glyphicon glyphicon-trash"></i> delete<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

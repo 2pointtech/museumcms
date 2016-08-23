@@ -1,0 +1,28 @@
+<h1>Ticketing &gt; Events</h1>
+
+<p><%= button_to 'New Event', new_ticketing_event_path, :method => :get, :class => 'btn' %></p>
+<table class="ticketing_events table table-striped crud" data-table-name="ticketing_events">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Date</th>
+      <th>Type</th>
+        <th>Modified</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ticketing_events.each do |ticketing_event| %>
+      <tr data-id="<%= ticketing_event.id %>">
+      <td><%= ticketing_event.title %></td>
+      <td><%= ticketing_event.date %></td>
+      <td><%= ticketing_event.type %></td>
+          <td><%= ticketing_event.updated_at %></td>
+        <td>
+          <%= link_to edit_ticketing_event_path(ticketing_event) do %><i class="glyphicon glyphicon-edit"></i> edit<% end %>
+          <%= link_to ticketing_event_path(ticketing_event), :method => :delete, :confirm => "Are you sure?" do %><i class="glyphicon glyphicon-trash"></i> delete<% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
